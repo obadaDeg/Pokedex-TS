@@ -1,5 +1,7 @@
 import { createInterface } from "node:readline";
 import { commandExit } from "./command_exit.js";
+import { commandHelp } from "./command_help.js";
+import { CLICommand } from "./command.js";
 
 export function cleanInput(input: string): string[] {
   const inputSplitted = input.trim().split(" ");
@@ -13,12 +15,6 @@ export function cleanInput(input: string): string[] {
   return [input];
 }
 
-export type CLICommand = {
-  name: string;
-  description: string;
-  callback: (commands: Record<string, CLICommand>) => void;
-};
-
 export function getCommands(): Record<string, CLICommand> {
   return {
     exit: {
@@ -26,6 +22,11 @@ export function getCommands(): Record<string, CLICommand> {
       description: "Exits the pokedex",
       callback: commandExit,
     },
+    help: {
+      name: "help",
+      description: "Shows this help message",
+      callback: commandHelp,
+    }
     // can add more commands here
   };
 }
