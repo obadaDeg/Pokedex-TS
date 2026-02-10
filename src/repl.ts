@@ -26,7 +26,7 @@ export function startREPL(state: State) {
 
     if (state.commands[command]) {
       try {
-        await state.commands[command].callback(state);
+        await state.commands[command].callback(state, ...args);
       } catch (error) {
         console.error(error);
       }
