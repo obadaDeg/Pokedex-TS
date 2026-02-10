@@ -1,7 +1,4 @@
-import { createInterface } from "node:readline";
-import { commandExit } from "./command_exit.js";
-import { commandHelp } from "./command_help.js";
-import { CLICommand } from "./command.js";
+import type { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
   const inputSplitted = input.trim().split(" ");
@@ -15,47 +12,23 @@ export function cleanInput(input: string): string[] {
   return [input];
 }
 
-export function getCommands(): Record<string, CLICommand> {
-  return {
-    exit: {
-      name: "exit",
-      description: "Exits the pokedex",
-      callback: commandExit,
-    },
-    help: {
-      name: "help",
-      description: "Shows this help message",
-      callback: commandHelp,
-    }
-    // can add more commands here
-  };
-}
-
-export function startREPL() {
-  const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: "Pokedex > ",
-  });
-
-  const commands = getCommands();
-
-  rl.prompt();
-  rl.on("line", (line) => {
+export function startREPL(state: State) {
+  state.rl.prompt();
+  state.rl.on("line", (line) => {
     const input = cleanInput(line);
     if (input.length === 0) {
-      rl.prompt();
+      state.rl.prompt();
       return;
     }
 
     const command = input[0];
     const args = input.slice(1);
 
-    if (commands[command]) {
-      commands[command].callback(commands);
+    if (state.commands[command]) {
+      state.commands[command].callback(state);
     } else {
       console.log(`Unknown command: ${command}`);
     }
-    rl.prompt();
+    state.rl.prompt();
   });
 }
