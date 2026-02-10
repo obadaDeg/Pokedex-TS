@@ -23,7 +23,7 @@ export class Cache {
     }, this.#interval);
   }
 
-  #stopReapLoop() {
+  stopReapLoop() {
     if (this.#reapIntervalId) {
       clearInterval(this.#reapIntervalId);
       this.#reapIntervalId = undefined;
@@ -46,10 +46,10 @@ export class Cache {
     });
   }
 
-  get<T>(key: string): T | null {
+  get<T>(key: string): T | undefined {
     const entry = this.#cache.get(key);
     if (!entry) {
-      return null;
+      return undefined;
     }
     return entry.val;
   }
