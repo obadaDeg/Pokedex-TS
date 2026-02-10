@@ -3,6 +3,7 @@ import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
 import { PokeAPI } from "./pokeapi.js";
 import { commandMap } from "./command_map.js";
+import { commandMapb } from "./command_mapb.js";
 
 export type CLICommand = {
   name: string;
@@ -37,9 +38,14 @@ export function initState(): State {
       callback: async (state: State) => await commandHelp(state),
     },
     map: {
-        name: "map",
-        description: "Shows the map of the pokedex",
-        callback: async (state: State) => await commandMap(state),
+      name: "map",
+      description: "Shows the map of the pokedex",
+      callback: async (state: State) => await commandMap(state),
+    },
+    mapb: {
+      name: "mapb",
+      description: "Shows the previous map of the pokedex",
+      callback: async (state: State) => await commandMapb(state),
     }
   };
 
