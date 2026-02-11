@@ -2,17 +2,19 @@
 > pokedex-ts@1.0.0 dev
 > npx tsc && node dist/main.js
 
-Pokedex > Exploring pastoria-city-area...
-Unknown command: 
-Pokedex > Found Pokemon:
- - tentacool
- - tentacruel
- - magikarp
- - gyarados
- - remoraid
- - octillery
- - wingull
- - pelipper
- - shellos
- - gastrodon
-Pokedex > Closing the Pokedex... Goodbye!
+Pokedex > Throwing a Pokeball at pidgey...
+pidgey was caught!
+Pokedex > Name: pidgey
+Height: 3
+Weight: 18
+Stats:
+  hp: 40 (effort: 0)
+  attack: 45 (effort: 0)
+  defense: 40 (effort: 0)
+  special-attack: 35 (effort: 0)
+  special-defense: 35 (effort: 0)
+  speed: 56 (effort: 1)
+Types:
+  normal
+  flying
+Pokedex > 

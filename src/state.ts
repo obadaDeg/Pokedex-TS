@@ -6,6 +6,7 @@ import { commandMap } from "./command_map.js";
 import { commandMapb } from "./command_mapb.js";
 import { commandExplore } from "./command_explore.js";
 import { commandCatch } from "./command_catch.js";
+import { commandInspect } from "./inspect_command.js";
 
 export type CLICommand = {
   name: string;
@@ -59,6 +60,11 @@ export function initState(): State {
       name: "catch",
       description: "Catch a pokemon",
       callback: async (state: State, ...args: string[]) => await commandCatch(state, ...args),
+    },
+    inspect: {
+        name: "inspect",
+        description: "Inspect a pokemon in your pokedex",
+        callback: async (state: State, ...args: string[]) => await commandInspect(state, ...args),
     }
   };
 
