@@ -1,28 +1,14 @@
-import { createInterface, type Interface } from "readline";
-import { commandExit } from "./command_exit.js";
-import { commandHelp } from "./command_help.js";
-import { PokeAPI, type Pokemon } from "./pokeapi.js";
-import { commandMap } from "./command_map.js";
-import { commandMapb } from "./command_mapb.js";
-import { commandExplore } from "./command_explore.js";
-import { commandCatch } from "./command_catch.js";
-import { commandInspect } from "./inspect_command.js";
-import { commandPokdex } from "./command_pokedex.js";
-
-export type CLICommand = {
-  name: string;
-  description: string;
-  callback: (state: State, ...args: string[]) => Promise<void>;
-};
-
-export type State = {
-  rl: Interface;
-  commands: Record<string, CLICommand>;
-  pokeAPI: PokeAPI;
-  nextLocationURL: string | null;
-  prevLocationURL: string | null;
-  pokedex: Record<string, Pokemon>;
-};
+import { createInterface } from "readline";
+import { commandExit } from "./commands/exit.js";
+import { commandHelp } from "./commands/help.js";
+import { commandMap } from "./commands/map.js";
+import { commandMapb } from "./commands/mapb.js";
+import { commandExplore } from "./commands/explore.js";
+import { commandCatch } from "./commands/catch.js";
+import { commandInspect } from "./commands/inspect.js";
+import { commandPokedex } from "./commands/pokedex.js";
+import { PokeAPI } from "./api/pokeapi.js";
+import type { CLICommand, State } from "./types/index.js";
 
 export function initState(): State {
   const rl = createInterface({
@@ -63,14 +49,14 @@ export function initState(): State {
       callback: async (state: State, ...args: string[]) => await commandCatch(state, ...args),
     },
     inspect: {
-        name: "inspect",
-        description: "Inspect a pokemon in your pokedex",
-        callback: async (state: State, ...args: string[]) => await commandInspect(state, ...args),
+      name: "inspect",
+      description: "Inspect a pokemon in your pokedex",
+      callback: async (state: State, ...args: string[]) => await commandInspect(state, ...args),
     },
     pokedex: {
       name: "pokedex",
       description: "Shows the pokedex",
-      callback: async (state: State) => await commandPokdex(state),
+      callback: async (state: State) => await commandPokedex(state),
     },
   };
 

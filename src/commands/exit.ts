@@ -1,4 +1,4 @@
-import type { State } from "./state.js";
+import type { State } from "../types/index.js";
 
 export async function commandExit(state: State) {
   console.log("Closing the Pokedex... Goodbye!");

@@ -1,4 +1,4 @@
-import type { State } from "./state.js";
+import type { State } from "./types/index.js";
 
 export function cleanInput(input: string): string[] {
   const inputSplitted = input.trim().split(" ");

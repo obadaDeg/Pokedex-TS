@@ -1,11 +1,11 @@
 import { describe, expect, test, vi } from "vitest";
-import type { State } from "./state";
-import type { Pokemon } from "./pokeapi";
-import { commandCatch } from "./command_catch";
-import { commandExplore } from "./command_explore";
-import { commandInspect } from "./inspect_command";
-import { commandPokdex } from "./command_pokedex";
-import { commandMapb } from "./command_mapb";
+import type { State } from "../types/index";
+import type { Pokemon } from "../types/index";
+import { commandCatch } from "../commands/catch";
+import { commandExplore } from "../commands/explore";
+import { commandInspect } from "../commands/inspect";
+import { commandPokedex } from "../commands/pokedex";
+import { commandMapb } from "../commands/mapb";
 
 const mockPokemon: Pokemon = {
   id: 25,
@@ -153,7 +153,7 @@ describe("commandInspect", () => {
   });
 });
 
-describe("commandPokdex", () => {
+describe("commandPokedex", () => {
   test("lists caught pokemon", async () => {
     const state = createMockState({
       pokedex: {
@@ -163,7 +163,7 @@ describe("commandPokdex", () => {
     });
     const spy = vi.spyOn(console, "log").mockImplementation(() => {});
 
-    await commandPokdex(state);
+    await commandPokedex(state);
 
     expect(spy).toHaveBeenCalledWith("Your Pokedex:");
     expect(spy).toHaveBeenCalledWith(" - pikachu");
@@ -175,7 +175,7 @@ describe("commandPokdex", () => {
     const state = createMockState();
     const spy = vi.spyOn(console, "log").mockImplementation(() => {});
 
-    await commandPokdex(state);
+    await commandPokedex(state);
 
     expect(spy).toHaveBeenCalledWith("Your Pokedex:");
     expect(spy).toHaveBeenCalledTimes(1);

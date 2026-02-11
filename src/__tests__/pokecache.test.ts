@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { Cache } from "./pokecache";
+import { Cache } from "../api/pokecache";
 
 describe("Cache", () => {
   test("add and get a value", () => {

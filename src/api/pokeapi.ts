@@ -1,4 +1,5 @@
 import { Cache } from "./pokecache.js";
+import type { ShallowLocations, Location, Pokemon } from "../types/index.js";
 
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
@@ -59,79 +60,3 @@ export class PokeAPI {
     return data;
   }
 }
-
-export type ShallowLocations = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: {
-    name: string;
-    url: string;
-  }[];
-};
-
-export type Location = {
-  id: number;
-  name: string;
-  game_index: number;
-  location: {
-    name: string;
-    url: string;
-  };
-  names: {
-    name: string;
-    language: {
-      name: string;
-      url: string;
-    };
-  }[];
-  pokemon_encounters: {
-    pokemon: {
-      name: string;
-      url: string;
-    };
-    version_details: {
-      version: {
-        name: string;
-        url: string;
-      };
-      max_chance: number;
-      encounter_details: {
-        min_level: number;
-        max_level: number;
-        chance: number;
-        method: {
-          name: string;
-          url: string;
-        };
-        condition_values: {
-          name: string;
-          url: string;
-        }[];
-      }[];
-    }[];
-  }[];
-};
-
-export type Pokemon = {
-  id: number;
-  name: string;
-  base_experience: number;
-  height: number;
-  weight: number;
-  stats: {
-    base_stat: number;
-    effort: number;
-    stat: {
-      name: string;
-      url: string;
-    };
-  }[];
-  types: {
-    slot: number;
-    type: {
-      name: string;
-      url: string;
-    };
-  }[];
-};
